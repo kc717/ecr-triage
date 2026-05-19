@@ -1,0 +1,47 @@
+# FHIR Server Configuration
+# eCR-Triage Project
+
+# Public test servers (no auth required)
+servers:
+  hapi_r4:
+    base_url: "https://hapi.fhir.org/baseR4"
+    auth: none
+    description: "HAPI FHIR R4 public test server"
+
+  firely_r4:
+    base_url: "https://server.fire.ly/r4"
+    auth: none
+    description: "Firely R4 public test server"
+
+# Default server for development
+default_server: hapi_r4
+
+# Resource types we read from eICR Bundles
+ecr_resources:
+  - Bundle
+  - Patient
+  - Condition
+  - Encounter
+  - Observation
+  - Immunization
+  - Organization
+
+# Resource types we write back
+writeback_resources:
+  - Flag
+  - Task
+
+# Triage priority levels
+priority_levels:
+  - code: "urgent"
+    display: "Urgent"
+    description: "Immediate investigation required"
+  - code: "high"
+    display: "High"
+    description: "Investigation within 24 hours"
+  - code: "routine"
+    display: "Routine"
+    description: "Standard processing timeline"
+  - code: "low"
+    display: "Low"
+    description: "Batch processing acceptable"
