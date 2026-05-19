@@ -126,8 +126,8 @@ python -m src.triage_engine
 | Name | Role | University |
 |------|------|-----------|
 | Kevin Chen | Lead Developer | Indiana University Indianapolis |
-| TBD | | |
-| TBD | | |
+| Sarah Danziger|Lead Developer | Columbia University |
+| Virginia Lorenzi | Mentor | Columbia University |
 
 ## License
 
