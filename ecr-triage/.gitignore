@@ -33,6 +33,7 @@ data/processed/*.csv
 data/processed/*.parquet
 data/synthea/*.json
 data/synthea/*.ndjson
+data/synthea/*.jar
 !data/**/.gitkeep
 
 # Models

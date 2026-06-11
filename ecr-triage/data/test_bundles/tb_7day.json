@@ -1,0 +1,132 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient-test-tb",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "test-tb",
+        "name": [
+          {
+            "use": "official",
+            "family": "Testcase",
+            "given": [
+              "TB"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1975-08-30",
+        "address": [
+          {
+            "city": "Indianapolis",
+            "state": "IN",
+            "country": "US"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:condition-test-tb",
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "56717001",
+              "display": "Tuberculosis (disorder)"
+            }
+          ],
+          "text": "Tuberculosis (disorder)"
+        },
+        "subject": {
+          "reference": "urn:uuid:patient-test-tb"
+        },
+        "onsetDateTime": "2026-05-20T14:00:00-04:00"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:encounter-test-tb",
+      "resource": {
+        "resourceType": "Encounter",
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "type": [
+          {
+            "text": "Pulmonary clinic visit"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:patient-test-tb"
+        },
+        "period": {
+          "start": "2026-05-20T14:00:00-04:00"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:obs-test-tb",
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ],
+          "text": "Body temperature"
+        },
+        "subject": {
+          "reference": "urn:uuid:patient-test-tb"
+        },
+        "effectiveDateTime": "2026-05-20T14:00:00-04:00",
+        "valueQuantity": {
+          "value": 38.0,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

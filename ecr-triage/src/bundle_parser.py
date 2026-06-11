@@ -220,9 +220,25 @@ class BundleParser:
 
         # Conditions
         conditions = parsed.get("Conditions", [])
-        lines.append("## REPORTABLE CONDITIONS")
-        if conditions:
-            for c in conditions:
+        lines.append("## CONDITION HISTORY")
+        
+        active_conds = [c for c in conditions if c.get("clinical_status") == "active"]
+        past_conds = [c for c in conditions if c.get("clinical_status") != "active"]
+        
+        lines.append("### Active Conditions")
+        if active_conds:
+            for c in active_conds:
+                lines.append(
+                    f"  - {c['display']} | Code: {c['code']} ({c['system']}) | "
+                    f"Onset: {c['onset'] or 'N/A'} | "
+                    f"Status: {c['clinical_status'] or 'N/A'}"
+                )
+        else:
+            lines.append("  (none recorded)")
+            
+        lines.append("\n### Resolved / Past Conditions")
+        if past_conds:
+            for c in past_conds:
                 lines.append(
                     f"  - {c['display']} | Code: {c['code']} ({c['system']}) | "
                     f"Onset: {c['onset'] or 'N/A'} | "

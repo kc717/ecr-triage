@@ -1,0 +1,32 @@
+[
+  {
+    "file": "measles_24hr.json",
+    "condition": "Measles (disorder)",
+    "expected_tier": "24-hour",
+    "why": "Measles is explicitly 24-hour (immediately notifiable, urgent). Pediatric + high fever should drive a high within-tier score."
+  },
+  {
+    "file": "hepA_7day.json",
+    "condition": "Viral hepatitis, type A",
+    "expected_tier": "7-day",
+    "why": "Hepatitis A acute is routinely notifiable = 7-day. Adult, no special risk flags -> moderate score."
+  },
+  {
+    "file": "tb_7day.json",
+    "condition": "Tuberculosis (disorder)",
+    "expected_tier": "7-day",
+    "why": "TB is routinely notifiable = 7-day per the federal list. (Note: many states treat TB far more urgently - good talking point for the jurisdiction-variation caveat.)"
+  },
+  {
+    "file": "anthrax_4hr.json",
+    "condition": "Anthrax (disorder)",
+    "expected_tier": "4-hour",
+    "why": "Anthrax with unrecognized source = 4-hour (extremely urgent). Provisional/suspected status is intentional - tests the 'all cases prior to classification' handling."
+  },
+  {
+    "file": "noncond_control.json",
+    "condition": "Acute viral pharyngitis (disorder)",
+    "expected_tier": "non-notifiable",
+    "why": "Control case: pharyngitis is NOT notifiable. Should return non-notifiable + flag for human review. Confirms the fallback still works among the reportable cases."
+  }
+]

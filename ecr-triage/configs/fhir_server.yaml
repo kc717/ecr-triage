@@ -1,12 +1,15 @@
-# FHIR Server Configuration
-# eCR-Triage Project
-
-# Public test servers (no auth required)
+# Local Docker HAPI FHIR (primary — run with docker-compose)
 servers:
+  local_hapi:
+    base_url: "http://localhost:8080/fhir"
+    auth: none
+    description: "HAPI FHIR R4 running locally via Docker"
+
+  # Fallback: public test server (for reference only)
   hapi_r4:
     base_url: "https://hapi.fhir.org/baseR4"
     auth: none
-    description: "HAPI FHIR R4 public test server"
+    description: "HAPI FHIR R4 public test server (fallback)"
 
   firely_r4:
     base_url: "https://server.fire.ly/r4"
@@ -14,7 +17,7 @@ servers:
     description: "Firely R4 public test server"
 
 # Default server for development
-default_server: hapi_r4
+default_server: local_hapi
 
 # Resource types we read from eICR Bundles
 ecr_resources:

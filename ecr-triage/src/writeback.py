@@ -16,6 +16,9 @@ _TASK_PRIORITY_MAP = {
     "high": "asap",
     "routine": "routine",
     "low": "routine",
+    "4-hour": "stat",
+    "24-hour": "asap",
+    "7-day": "routine",
 }
 
 
