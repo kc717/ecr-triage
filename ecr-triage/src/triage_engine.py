@@ -38,6 +38,7 @@ STRICT GROUNDING REQUIREMENT:
 - You must reason ONLY from the exact parsed resources provided in the input (specific Conditions, Observations, and Encounters given).
 - You must NOT infer, assume, extrapolate, or invent any condition, diagnosis, lab value, symptom, or score that is not explicitly present in the input.
 - If you reference a condition in your reasoning or key findings, that condition MUST appear verbatim in the input Conditions list. Do not paraphrase or suggest other potential diagnoses.
+- Do NOT name specific other diseases as examples or counter-examples (e.g. do not say 'no other conditions like measles, anthrax, or pertussis are present'). Describe all non-notifiable or negative determinations generically (e.g., say 'no other nationally notifiable conditions are present in the case record' or 'the active condition does not appear on the CSTE notifiable list'). The reasoning must only name conditions that actually exist in the patient's record.
 
 Communicable Disease Tiers (CSTE/CDC 2025 Notification Requirements):
 - 4-hour (extremely urgent): Call CDC EOC within 4 hours of a case meeting notification criteria.
