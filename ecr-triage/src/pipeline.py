@@ -200,8 +200,23 @@ def run_from_file(filepath: str, writeback: bool = False) -> dict:
     with open(filepath) as f:
         bundle = json.load(f)
 
+    parser = BundleParser()
+    parsed = parser.parse_bundle(bundle)
     engine = TriageEngine()
     result = engine.triage_bundle(bundle)
+
+    # Run validation
+    from src.validator import validate_triage_result
+    report = validate_triage_result(result, parsed)
+    result["validation_report"] = report
+    if not report["passed"]:
+        result["needs_human_review"] = True
+        if "recommended_actions" not in result:
+            result["recommended_actions"] = []
+        result["recommended_actions"].append(
+            f"VALIDATION FAILURE: {'; '.join(report['failures'])}. Flagged for manual human review."
+        )
+
     _print_result(result)
 
     if writeback:
@@ -237,8 +252,22 @@ def run_live(count: int = 5, writeback: bool = False, output_dir: str = "data/pr
     triage_results = engine.triage_batch(case_prompts)
     results = []
 
-    for result, patient_id in zip(triage_results, patient_ids):
+    from src.validator import validate_triage_result
+    for result, patient_id, bundle in zip(triage_results, patient_ids, bundles):
         result["patient_id"] = patient_id
+        parsed = parser.parse_bundle(bundle)
+        
+        # Run validation
+        report = validate_triage_result(result, parsed)
+        result["validation_report"] = report
+        if not report["passed"]:
+            result["needs_human_review"] = True
+            if "recommended_actions" not in result:
+                result["recommended_actions"] = []
+            result["recommended_actions"].append(
+                f"VALIDATION FAILURE: {'; '.join(report['failures'])}. Flagged for manual human review."
+            )
+            
         results.append(result)
         _print_result(result)
 
