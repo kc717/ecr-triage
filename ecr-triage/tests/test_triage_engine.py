@@ -1,7 +1,7 @@
 """Tests for TriageEngine."""
 
 import pytest
-from src.triage_engine import TriageEngine, PRIORITY_LEVELS
+from src.triage_engine import TriageEngine, CSTE_TIERS
 
 
 class TestTriageEngine:
@@ -10,11 +10,11 @@ class TestTriageEngine:
     def setup_method(self):
         self.engine = TriageEngine()
 
-    def test_priority_levels_defined(self):
-        assert "urgent" in PRIORITY_LEVELS
-        assert "high" in PRIORITY_LEVELS
-        assert "routine" in PRIORITY_LEVELS
-        assert "low" in PRIORITY_LEVELS
+    def test_cste_tiers_defined(self):
+        assert "4-hour" in CSTE_TIERS
+        assert "24-hour" in CSTE_TIERS
+        assert "7-day" in CSTE_TIERS
+        assert "non-notifiable" in CSTE_TIERS
 
     @pytest.mark.skip(reason="Requires API key — integration test")
     def test_triage_returns_valid_priority(self):
@@ -25,7 +25,13 @@ class TestTriageEngine:
         Observations: Temperature 39.2°C, Rash present
         """
         result = self.engine.triage(sample_prompt)
-        assert result["priority"] in PRIORITY_LEVELS
+        assert result["tier"] in CSTE_TIERS
+        assert "urgency_score" in result
+        assert "reasoning" in result
+        assert "recommended_actions" in result
+        assert "key_findings" in result
+        # Check compatibility mapping fields
+        assert "priority" in result
         assert "rationale" in result
 
     @pytest.mark.skip(reason="Requires API key — integration test")
